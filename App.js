@@ -1,12 +1,27 @@
 import React from 'react';
 import {ImageBackground, StyleSheet, Text, TextInput, View} from 'react-native';
 import Login from './screens/login';
+import { NavigationContainer, StackRouter } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Acceuil from './screens/acceuil';
+import CreateUser from './screens/CreateUser';
+import Home from './screens/Home';
 
 
+const Stack = createNativeStackNavigator();
+const App = () => { 
+  return (
+    <NavigationContainer >
+    <Stack.Navigator initialRouteName='Home'>
+    <Stack.Screen options={{headerShown: false}} name='Login' component={Login}/>
+        <Stack.Screen options={{headerShown: false}} name='Acceuil' component={Acceuil}/>
+        <Stack.Screen options={{headerShown: false}} name='CreateUser' component={CreateUser}/>
+        <Stack.Screen options={{headerShown: false}} name = 'Home' component={Home}/>
+      
+    </Stack.Navigator>
+    </NavigationContainer>
 
-const App = () => (
- <Login/>
-);
+)};
 
 const styles = StyleSheet.create({
   container: {

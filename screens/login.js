@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react'
 import { Alert, Button, StyleSheet } from 'react-native';
 import {ImageBackground,  Text, TextInput, View} from 'react-native';
@@ -6,6 +7,7 @@ const Login = () =>
 { 
   const [login , setlogin ] = useState('');
   const [pwd , setpwd ] = useState('');
+  const navigation = useNavigation();
 
   return (
     <View style={styles.container}>
@@ -16,15 +18,17 @@ const Login = () =>
         textAlign : 'center'
        }}>Authentification</Text>
       <TextInput
-      onChange={(e) => {setlogin(e.target.value);}}
+       onChangeText={(text) => setlogin(text)}
         style={styles.input}  
         placeholder="Email "
     
       />
       <TextInput
-      onChangeText={(e) => {setpwd()}}
+       onChangeText={(text) => setpwd(text)}
         style={styles.input}
         placeholder="Password "
+        secureTextEntry={true}
+      
       />
    <View style={{ flexDirection: 'row', justifyContent: 'space-between' , paddingTop:20}}>
       <View style={{ flex: 0.4 , paddingLeft:15 }}>
@@ -37,9 +41,10 @@ const Login = () =>
       </View>
       <View style={{ flex: 0.4 , paddingRight : 15 }}>
         <Button
-          title="Button 2"
+          title="Create User"
           onPress={() => {
-            // Add your button's functionality here
+            navigation.navigate("CreateUser");
+            
           }}
         />
       </View>
