@@ -47,9 +47,10 @@ const CreateUser = () => {
             onPress={()=>{
 
                 if (pwd == cpwd ){
-                    auth.createUserWithEmailAndPassword(login, pwd).then(() =>{
-                        navigation.navigate("Acceuil")
-                    }).catch((err)=>
+                    auth.createUserWithEmailAndPassword(login, pwd).then((userCredential) =>{
+                      const user = userCredential.user;
+                    console.log("User created successfully:", user);
+                       navigation.navigate("Login");                    }).catch((err)=>
                     {
                         alert(err);
                     })

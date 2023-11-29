@@ -2,12 +2,14 @@ import { useNavigation } from '@react-navigation/native';
 import React, { useState } from 'react'
 import { Alert, Button, StyleSheet } from 'react-native';
 import {ImageBackground,  Text, TextInput, View} from 'react-native';
+import firebase from '../config';
 
 const Login = () => 
 { 
   const [login , setlogin ] = useState('');
   const [pwd , setpwd ] = useState('');
   const navigation = useNavigation();
+  const auth = firebase.auth();
 
   return (
     <View style={styles.container}>
@@ -33,9 +35,16 @@ const Login = () =>
    <View style={{ flexDirection: 'row', justifyContent: 'space-between' , paddingTop:20}}>
       <View style={{ flex: 0.4 , paddingLeft:15 }}>
         <Button
-          title="Button 1"
+          title="Login"
           onPress={() => {
-            alert (`Email ${login} \n Password ${pwd}`);           
+            auth.signInWithEmailAndPassword(login, pwd).then((userCredential) =>{
+                      const user = userCredential.user;
+                      console.log("User signed in successfully:", user);
+                      navigation.navigate("Home")}).catch((err)=>
+                    {
+                        alert("Invalid Password or Email ");
+                    })
+                      
           }}
         />
       </View>
@@ -43,7 +52,7 @@ const Login = () =>
         <Button
           title="Create User"
           onPress={() => {
-            navigation.navigate("CreateUser");
+            navigation.navigate('CreateUser')
             
           }}
         />
