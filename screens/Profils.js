@@ -7,6 +7,7 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableHighlight,
+  ImageBackground,
 } from "react-native";
 import * as ImagePicker from 'expo-image-picker';
 import firebase from '../config/index';
@@ -101,6 +102,7 @@ const Profils = () => {
 
   return (
     <View style={styles.container}>
+    
       <Text style={{ marginBottom: 25 }}>Profile</Text>
 
       <TouchableOpacity onPress={selectImage}>
@@ -133,7 +135,6 @@ const Profils = () => {
       <TouchableHighlight style={styles.loginBtn} onPress={handleValidation}>
         <Text style={styles.loginText}>Add Contact</Text>
       </TouchableHighlight>
-
     </View>
   );
 };
@@ -144,6 +145,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   profileImage: {
     width: 100,
     height: 100,
