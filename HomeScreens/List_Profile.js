@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, FlatList, Image } from "react-native";
+import { View, Text, FlatList, Image, TouchableOpacity } from "react-native";
 import { List } from "react-native-paper";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import firebase from "../config";
+import { useNavigation } from "@react-navigation/native";
 
 const database = firebase.database();
 const auth = firebase.auth();
 
+
 export default function List_Profil() {
   const [data, setData] = useState([]);
   const ref_profils = database.ref("contacts");
+  const navigation = useNavigation();
 
   useEffect(() => {
     const getCurrentUserEmail = async () => {
@@ -42,11 +45,15 @@ export default function List_Profil() {
 
     getCurrentUserEmail();
   }, []);
-
+  const navigateToChat = (contactEmail ,contactName ) => {
+    console.log('navigateToChat', contactName);
+    navigation.navigate('Chat', { contactEmail ,contactName });
+  };
   const renderItem = ({ item, index }) => (
+    <TouchableOpacity >
     <List.Item
       title={`${item.Name} ${item.Surname}`}
-      description={`Email: ${item.Email}`}
+      description={`Email: ${item.UserEmail}`}
       left={() => (
         <View style={{ marginRight: 10 }}>
           {item["ProfileImage"] ? (
@@ -71,15 +78,14 @@ export default function List_Profil() {
           style={{ alignSelf: "center" }}
         />
       )}
-      onPress={() => {
-        // Handle item press if needed
-      }}
+      onPress={() => navigateToChat(item.UserEmail,`${item.Name} ${item.Surname}` )}
       style={{
         backgroundColor: index % 2 === 0 ? "#64B5F6" : "#81C784",
         margin: 5,
         borderRadius: 10,
       }}
     />
+    </TouchableOpacity>
   );
 
   return (

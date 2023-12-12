@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Acceuil from './screens/acceuil';
 import CreateUser from './screens/CreateUser';
 import Home from './screens/Home';
+import Chat from './screens/Chat';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,7 @@ const App = () => {
         <Stack.Screen options={{headerShown: false}} name='Acceuil' component={Acceuil}/>
         <Stack.Screen options={{headerShown: false}} name='CreateUser' component={CreateUser}/>
         <Stack.Screen options={{headerShown: false}} name = 'Home' component={Home}/>
+        <Stack.Screen options={{headerShown: false}} name = 'Chat' component={Chat}/>
       
     </Stack.Navigator>
     </NavigationContainer>

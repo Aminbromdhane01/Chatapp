@@ -23,6 +23,7 @@ const Profils = () => {
   const [PhoneNumber, setPhoneNumber] = useState("");
   const [profileImage, setProfileImage] = useState(null);
   const [userEmail, setUserEmail] = useState(null);
+  const [email , setEmail] = useState(null);
   
    
 
@@ -57,7 +58,8 @@ const Profils = () => {
         Surname: Surname,
         PhoneNumber: PhoneNumber,
         ProfileImage: profileImage,
-        Email:userEmail
+        Email:userEmail,
+        UserEmail : email
       });
 
       setFullName('');
@@ -101,6 +103,10 @@ const Profils = () => {
   };
 
   return (
+    <ImageBackground
+      source={require("../assets/background.jpg")}
+      style={styles.backgroundImage}
+    >
     <View style={styles.container}>
     
       <Text style={{ marginBottom: 25 }}>Profile</Text>
@@ -131,15 +137,26 @@ const Profils = () => {
         placeholder=" Phone Number"
         onChangeText={(text) => setPhoneNumber(text)}
       />
+      <TextInput
+        style={styles.input}
+        placeholder=" Email Address"
+        onChangeText={(text) => setEmail(text)}
+      />
 
       <TouchableHighlight style={styles.loginBtn} onPress={handleValidation}>
         <Text style={styles.loginText}>Add Contact</Text>
       </TouchableHighlight>
     </View>
+    </ImageBackground>
   );
 };
 
 const styles = StyleSheet.create({
+  backgroundImage: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center",
+  },
   container: {
     flex: 1,
     alignItems: "center",
